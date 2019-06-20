@@ -1,0 +1,345 @@
+%acmsmall: The default journal template style.
+%acmlarge: Used by JOCCH and TAP.
+%acmtog: Used by TOG.
+%acmconf: The default proceedings template style.
+%sigchi: Used for SIGCHI conference articles.
+%sigchi-a: Used for SIGCHI ``Extended Abstract'' articles.
+%sigplan: Used for SIGPLAN conference articles.
+\documentclass[format=acmsmall, 12pt, screen=true, review=false]{acmart}
+
+%% \BibTeX command to typeset BibTeX logo in the docs
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
+
+%% Rights management information.  This information is sent to you
+%% when you complete the rights form.  These commands have SAMPLE
+%% values in them; it is your responsibility as an author to replace
+%% the commands and values with those provided to you when you
+%% complete the rights form.
+\setcopyright{acmcopyright}
+\copyrightyear{2019}
+\acmYear{2019}
+\acmDOI{123456789}
+
+
+%%
+%% These commands are for a JOURNAL article.
+\acmJournal{TOMACS}
+\acmVolume{Vol}
+\acmNumber{Num}
+\acmArticle{Art}
+\acmMonth{Month}
+
+%%
+%% Submission ID.
+%% Use this when submitting an article to a sponsored event. You'll
+%% receive a unique submission ID from the organizers
+%% of the event, and this ID should be used as the parameter to this command.
+\acmSubmissionID{123-456-789}
+
+%%
+%% The majority of ACM publications use numbered citations and
+%% references.  The command \citestyle{authoryear} switches to the
+%% "author year" style.
+%% If you are preparing content for an event
+%% sponsored by ACM SIGGRAPH, you must use the "author year" style of
+%% citations and references.
+%\citestyle{acmauthoryear}
+\citestyle{acmnumeric}
+
+%% Useful packages
+\usepackage{multicol}
+\usepackage[UKenglish]{babel}
+\usepackage{comment}
+\usepackage[T1]{fontenc}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{tabu}
+\usepackage{float}
+
+%%
+%% The "title" command has an optional parameter,
+%% allowing the author to define a "short title" to be used in page headers.
+\title[Dynamic Impact Response of LG]{Dynamic Impact Response on Laminated Window Glass}
+\subtitle{Plan of Investigation}
+%If your title is lengthy, you must define a short version to be used
+%in the page headers, to prevent overlapping text. The \texttt{title}
+%command has a ``short title'' parameter:
+
+%%
+%% The "author" command and its associated commands are used to define
+%% the authors and their affiliations.
+%% Of note is the shared affiliation of the first two authors, and the
+%% "authornote" and "authornotemark" commands
+%% used to denote shared contribution to the research.
+
+%If your author list is lengthy, you must define a shortened version of
+%the list of authors to be used in the page headers, to prevent
+%overlapping text. The following command should be placed just after
+%the last \texttt{\author{}} definition:
+%\begin{verbatim}
+%  \renewcommand{\shortauthors}{McCartney, et al.}
+%\end{verbatim}
+%Omitting this command will force the use of a concatenated list of all
+%of the authors' names, which may result in overlapping text in the
+%page headers.
+
+\author{John-Paul Latham}
+\authornote{Imperial College London.}
+\email{j.p.latham@imperial.ac.uk}
+
+\author{Jason Xiang}
+\authornotemark[1]
+\email{j.xiang@imperial.ac.uk}
+
+\author{Ado Farsi}
+\authornotemark[1]
+\email{ado.farsi@imperial.ac.uk}
+
+\author{Michael Trapp}
+\email{mt5918@ic.ac.uk}
+\orcid{1234-5678-9012}
+\authornotemark[1]
+
+%%
+%% By default, the full list of authors will be used in the page
+%% headers. Often, this list is too long, and will overlap
+%% other information printed in the page headers. This command allows
+%% the author to define a more concise list
+%% of authors' names for this purpose.
+\renewcommand{\shortauthors}{Latham et al.}
+
+%% end of the preamble, start of the body of the document source.
+\begin{document}
+
+%%
+%% The abstract is a short summary of the work to be presented in the
+%% article.
+\begin{abstract}
+  Optimising the dynamic impact response of laminated window glass is important to improving public safety and security. Example applications involve counter-acting malicious human activity, persistance against natural hazards, and preventing and reducing the effects of injuries and accidents due to flying glass debris. A novel coupled multi-physics software has been developed by the \texttt{AMCG} group at Imperial College, based on the works of Munjiza et al. \cite{Mun95, Mun99, Mun12, Mun13}. In the past, the software has been successfully applied to geological applications. In this project, the software is applied to numerically predict the dynamic impact response of laminated window glass. The objective is to accurately and realistically simulate the impact of a projectile on a laminated glass plate in 2D (3D). The model geometry is prepared and stored in text files. The results are visualised and validated using numerical experiments from other research.
+\end{abstract}
+
+%%
+%% The code below is generated by the tool at http://dl.acm.org/ccs.cfm.
+%% Please copy and paste the code instead of the example below.
+%%
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10010405.10010432.10010439</concept_id>
+<concept_desc>Applied computing~Engineering</concept_desc>
+<concept_significance>300</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
+\ccsdesc[300]{Applied computing~Engineering}
+
+%%
+%% Keywords. The author(s) should pick words that accurately describe
+%% the work being presented. Separate the keywords with commas.
+\keywords{Laminated Window Glass, Impact Response, Fracturing, Numerical Modelling, FEMDEM, Combined Discrete-Finite Element Method, Coupled Physics Model, Multi-Phase Model, Brittle, Crack Initiation, Crack Propagation, Computational Modelling, ACMG, Imperial College}
+%%
+%% This command processes the author and affiliation and title
+%% information and builds the first part of the formatted document.
+
+\maketitle
+
+\section{Introduction}
+%A good introduction “sets the scene” for the reader. It starts with an overview of the project research area, moves on to the current state-of-play, and then ends with a statement of the aims and objectives of the project, and how you plan to achieve them. 
+
+Laminated glass is a sandwich structure consisting of two glass plies and an adhered inter-layer (or inter-face). The task of the inter-layer is the absorption of impact energy and the maintenance of adhesion to the plies \cite{Wu14}. An optional back layer improves structural stability and additional energy absorption \cite{Bio10, Bra10}.
+
+\bigbreak
+Inter-layer materials include polymers such as traditional polyvinyl butyral (\texttt{PVB}), thermoplastic polyurethane (\texttt{TPU}), and most recently \texttt{SentryGlas}\textregistered Plus (\texttt{SGP}) \cite{Moh18, Wan18}. The back layer traditionally consists of polycarbonate (\texttt{PC}) \cite{Mon04, Bra10}.
+
+\bigbreak
+Advantageous properties of laminated glass include a relatively high penetration resistance, low weight \cite{Wu14} and the bonding of glass fragments to reduce the risk of injuries \cite{Che17, Flo98, Ji98}. 
+
+\bigbreak
+Breakage of the inner ply significantly reduces strength and facilitates a full collapse of the glass \cite{Flo98}. The predictions of crack initiation and propagation pose a significant challenge and requires additional research effort.
+
+\section{Fracture Theory}
+
+Applying localised stress on glass necessitates consideration of pre-existing micro-structural material flaws (inhomogeneities, discontinuities) such as micro-cracks and voids \cite{Sch12}. Under increased, loading, these flaws grow in size, to critical flaws, which cause complete failure structural failure. \cite{Flo98, Pel16}. Most critical flaws are found on the cut and machined glass edges \cite{Pel16}. Linear Elastic Theory is most suitable to describe glass breakage as glass usually does not exhibit plastic behavior.
+
+\subsection{Energy balance}
+
+The Griffith criterion \cite{Sch12, And05} proposes an energy balance to predict the growth of a crack with crack length $a$ on a glass plate with uniform thickness $B$ :  
+
+\begin{equation}
+    \label{eq:GrifCrit}
+    \underbrace{\frac{1}{B}\left(\frac{dU_e}{da}-\frac{dU_i}{da}\right)}_{=G}=\underbrace{\frac{1}{B}\left(\frac{dU_a}{da}\right)}_{=R}\,,
+\end{equation}
+
+where $dU_e/da$ is the applied energy rate, $dU_i/da$ is the inertial energy rate, $dU_a/da$ is the surface energy,
+$G$ is the energy release rate and $R$ is the crack resistance force. Crack growth occurs when
+
+\begin{equation}
+    \label{eq:CrackIneq}
+    \frac{dU_e}{da}-\frac{dU_i}{da}\geq\frac{dU_a}{da}
+\end{equation}
+
+In the case of inequality, the crack growth is unstable. In the case eq. \ref{eq:CrackIneq} is false, no crack growth occurs.
+
+\subsection{Stress Intensity Factor}
+
+The stress intensity factor is a measure to characterize the  
+Material failure occurs if the . \cite{And05}
+
+\subsection{Analytical Models}
+
+Ji et al. \cite{Ji98} developed an analytical higher-order beam finite element and PVB inter-layer model.
+
+\bigbreak
+Mili et al. \cite{Mil12} attempted application of the \texttt{Hertzian Contact Law}, but only found accurate predictions for low impact velocities.
+
+\bigbreak
+Kuruvita et al. \cite{Kur14} investigated a spring-mass model, an energy balance model and a wave propagation method for the infinite thick plates.
+
+\section{Background Research}
+
+%t should also contain a BACKGROUND RESEARCH section. This might include a survey of relevant literature, programming methods or techniques, as well as any relevant discussion on different options that were available to you and a justification for any decisions that you will have made. 
+
+%If a key part of your project is the development of a software product, then you will need to include sections describing the software engineering method that you followed and detailing the results obtained during the different development phases such as requirements analysis, design, implementation and testing.  
+
+%If your project is mostly theoretical, then you should include sections detailing the development of your theory. This might include small programs to investigate certain aspects, explanations of algorithms, or descriptions of any particularly hard bits of theory. A theoretical project will probably have a section on results and some sections on their analysis. 
+
+%If your project involves computational experiments with real-world data, you will need a section or sections on experimental results, analysis, and conclusions derived from the experiments.
+
+\subsection{Experimental Studies}
+
+Relevant parameters of the impact projectile include the normal velocity \cite{Gra98, Kur14, Dar13, Wu14}, the mass \cite{Kur14, Dar13}, the angle \cite{Gra98, Kur14, Dar13}, the shape \cite{Dar13} and the size \cite{Wu14}.
+
+\bigbreak
+Relevant parameters for the outer glass ply include its dimensions \cite{Wan18}, its mass, the support conditions \cite{Wan18} and the make-up \cite{Wan18}.
+
+\bigbreak
+For the inter-layer, the material \cite{Moh18, Wan18, Mon04}, thickness \cite{Ji98, Kur14, Wan18} and temperature \cite{Moh18, Zha19} are relevant.
+
+\bigbreak
+Dynamic impact on laminated glass comprises hard and soft body impact \cite{Moh17}. Hard body impact such as ballistic impact \cite{Bra10} causes minimal deformation to the projectile, while soft body impact such as bird impact \cite{Moh17} causes the projectile to undergo extensive deformation.
+
+\bigbreak
+Low velocity ($\approx 20\,\mathrm{m}/\mathrm{s}$) hard impact experiments include the use of projectiles in form of road construction chippings \cite{Gra98}, ballistics \cite{Mon04}, drop-down weights \cite{Che15, Mil12, Wan18}, aluminum projectiles \cite{Mil12} and steel balls \cite{Beh99, Flo98, Wan18}. High velocity (around $180 m/s$) soft impact experiments include the use of silicon rubber projectiles \cite{Moh17} and gas guns \cite{Moh18}.
+
+\bigbreak
+Xu et al. \cite{Xu11} and Gao et al. \cite{Gao14} numerically carried out quasi-static and dynamic \texttt{Split Hopkinson Pressure Bar} (\texttt{SHPB}) compression experiments under different strain/loading rates. 
+
+\bigbreak
+The panel size had an inferior effect on the breakage resistance \cite{Wan18}. Monteleone et al. \cite{Mon04} found that only a local area of the ply around the impact absorbed the impact energy for high velocities.
+
+\bigbreak
+Kuruvita et al. \cite{Kur14} found that impact velocity and plate thickness contributed significantly towards the impact resistance, compared to impact mass and inter-layer thickness. Wang et al. \cite{Wan18} found an increased inter-layer thickness to have a negative effect on energy absorption. Liu et al. \cite{Liu16} established that the inter-layer thickness did not contribute towards energy absorption. In contrast, Behr and Kremer \cite{Beh99} found an increased inter-layer thickness to better protect the inner ply. Kim et al. \cite{Kim16} numerically optimised the \texttt{PVB} inter-layer constitution to prevent all damage to the inner glass ply.
+
+\bigbreak
+Liu et al. \cite{Liu16} numerically investigated the optimisability of the inter-layer in terms energy absorption by simulating the impact of a human head. Zhang et al. \cite{Zha19} investigated the influence of temperature on the inter-layer and found that a hybrid \texttt{TPU}/\texttt{SGP}/\texttt{TPU} inter-layer performed best over the entire range of tested temperatures.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Numerical Simulations}
+
+The task of fracture models is to predict crack initiation and propagation. Important parameters for crack initiation are the impact energy \cite{Wan18} and the peak impact force \cite{Wan18}. Relevant for crack propagation are the crack velocity \cite{Xu11}, crack breakage \cite{Xu11} and the stress intensity factor \cite{Xu11}. Finite element numerical simulations were conducted using the following software among others:
+
+\begin{enumerate}
+    \item \texttt{DYNA2D} \cite{Flo98, Beh99}
+    \item \texttt{LS-DYNA3D} \cite{Wu14}
+    \item \texttt{ABAQUS} \cite{Kur14, Moh17}
+\end{enumerate}
+
+\bigbreak
+Kim et al. \cite{Kim16} developed a higher-order beam \texttt{FEM} program with linear elastic glass and inter-layer.
+
+\bigbreak
+Classical fracture models, e.g. maximum principal stress and strain \cite{Alt17}, cannot predict crack initiation and propagation sufficiently accurate in most situations. The Rankine fracture criterion predicts crack initiation after the maximum principal stress reaches the material strength \cite{Pel16}. 
+
+\bigbreak
+The discrete element method (\texttt{DEM}) alone is not able to accurately model the common cracking pattern of glass \cite{Che17}. The combined discrete/finite element method (\texttt{FEMDEM}) remedyingly combines the solid interface and fracturing \cite{Wan18, Mun95, Mun99, Mun12, Mun13, Guo16, Gao14, Xu14, Che18}. 
+
+\bigbreak
+The basis for this approach was established by Munjiza et al. \cite{Mun13}, who developed a two-dimensional \texttt{FEMDEM} model. Guo et al. \cite{Guo16} extended to three dimensions.
+
+\bigbreak
+According to the method, discrete elements consist of clusters of deformable finite elements and cracks propagate along common finite element boundaries. Fracturing results in the formation of new discrete elements. The combination of discrete and finite elements is established via an interaction algorithm, which is based on the original distributed potential contact force approach \cite{Mun13}. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Approach}
+
+The approach is ... \\
+
+Useful parameters are ...
+\begin{enumerate}
+    \item Timestep: $\Delta t:\,0.2\rm{nm}$ \cite{Che18}
+    \item Glass layer: Triangular Mesh \cite{Che18}
+    \item Glass layer: number of elements $=9180$ \cite{Che18}
+    \item Glass layer: far field elemenet size $=2\rm{mm}$ \cite{Che18}
+    \item Inter-layer: no thermal effects \cite{Che18}
+    \item Inter-layer: purely elastic \cite{Che18, Ji98}
+    \item Inter-layer: hyper-elastic \texttt{Mooney-Rivling} \cite{Che16}
+    \item Inter-layer: linear visco-elastic \cite{Flo98}
+    \item Inter-layer: \texttt{Mindlin Plate Theory} \cite{Yua17, ElS18}
+    \item Inter-layer: visco-plastic \texttt{Johnson}-\texttt{Cook} \cite{Xu11, Gao14}
+\end{enumerate}
+
+\section{Results}
+
+The results are ...
+
+\section{Conclusion}
+
+The results show that ...
+
+\begin{acks}
+Gratitude is sent out to the \texttt{AMCG} group for supporting this project and to course director Gerard Gorman for enabling this research.
+\end{acks}
+
+\bibliographystyle{ACM-Reference-Format}
+\setlength{\bibsep}{5.0pt}
+\bibliography{LGP}
+
+\appendix
+
+\section{Mesh-Bound Numerical Fracture Models}
+
+\subsection{EDM}
+The element deletion method (\texttt{EDM}) or element erosion method (\texttt{EEM}) models crack initiation and propagation by either resetting the global mass matrix or by removing the element stresses \cite{Wan18, Liu16, Pel16}. Element removal equates to energy removal from the system, causing impact energy under-prediction \cite{Alt17, Ved17} - or fracture energy over-prediction \cite{Pel16} - and conflict with conservation laws \cite{Pel16}. Other drawbacks include inflexibility due to mesh-dependency and occasional instabilities \cite{Pel16}.
+
+\subsection{CZM}
+
+Another approach is the application of intrinsic and extrinsic \texttt{Cohesive Zone Models} (\texttt{CZM}), also called \texttt{Cohesive Crack Model} \cite{Gao14}. Such models involve adaptively inserting cohesive elements into the common boundaries between elements. This insertion creates an artificial compliance, i.e. an undesired elastic response. Compared to intrinsic models, extrinsic models additionally counter-act this response using formulated interface constraints via the Discontinuous Galerkin (\texttt{DG}) method. A disadvantage of the \texttt{DG} method is the significantly increased computational costs \cite{Wan18, Liu16, Che16}. Chen et al. \cite{Che16} modelled laminated glass using brick elements and applied an intrinsic cohesive formulation to model the adhesion between glass and \texttt{PVB}. 
+
+\subsection{XFEM}
+
+The extended finite element method (\texttt{XFEM}) \cite{Alt17, Xu10, Xu16} combines discontinuous and near-tip asymptotic fields through a unity method. \cite{Mun13} Although crack paths can be arbitrary, the explicit representation of the crack surface is required \cite{Rab04}.
+
+\subsection{PNM}
+
+The phantom-node method (\texttt{PNM}) duplicates nodes of overlapping elements along cracks.
+%no clue what this is...
+
+\subsection{BEM}
+
+Another approach is the boundary element method (\texttt{BEM}) \cite{Mun13}.
+%no clue what this is...
+\section{Mesh-Free Numerical Fracture Models}
+
+\subsection{SPH}
+
+Smooth particle hydrodynamics (\texttt{SPH}) \cite{Moh17, Moh18} methods redefine the influence particles \cite{Mun13}.
+
+\subsection{EFG}
+
+Element-free Galerkin method (\texttt{EFG}) or Cracking Particle Method (\texttt{CPM})  \cite{Pel16, Fle96, Rab04, Rab07, Rab10}
+define additional test and trial functions locally at the crack. The crack can be arbitrarily oriented, as its growth is represented discretely by activation of crack surfaces at individual particles. The crack is modelled by a local enrichment of the test and trial functions with a sign function (a variant of the Heaviside step function), so that the discontinuities are along the direction of the crack. The discontinuity consists of cylindrical planes centred at the particles in three dimensions, lines centred at the particles in two dimensions. The model is applied to several 2D problems and compared to experimental data. A shortcoming of this method is the required surface representation of the crack \cite{Rab04}.
+
+\end{document}
