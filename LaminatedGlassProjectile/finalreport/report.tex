@@ -152,7 +152,7 @@
 %%
 %% Keywords. The author(s) should pick words that accurately describe
 %% the work being presented. Separate the keywords with commas.
-\keywords{Laminated Window Glass, Impact Response, Fracturing, Numerical Modelling, FEMDEM, Combined Discrete-Finite Element Method, Coupled Physics Model, Multi-Phase Model, Brittle, Crack Initiation, Crack Propagation, Computational Modelling, ACMG, Imperial College}
+\keywords{Laminated Window Glass, Impact Response, ACMG, Imperial College, Computational Modelling, Numerical Modelling, FEMDEM, Combined Discrete-Finite Element Method, Coupled Physics Model, Multi-Phase Model, Multi-Physisc Model, Brittle Materials, Crack Initiation, Crack Propagation, Fracturing}
 %%
 %% This command processes the author and affiliation and title
 %% information and builds the first part of the formatted document.
@@ -173,38 +173,35 @@ Advantageous properties of laminated glass include a relatively high penetration
 \bigbreak
 Breakage of the inner ply significantly reduces strength and facilitates a full collapse of the glass \cite{Flo98}. The predictions of crack initiation and propagation pose a significant challenge and requires additional research effort.
 
+\bigbreak
+Local stress intensification is provided by pre-existing micro-structural material flaws (inhomogeneities, discontinuities) such as micro-cracks and voids \cite{Sch12}. Application of stress $\sigma_{\rm{f}}$ causes these flaws to grow in size. \cite{Flo98, Pel16}. Critical flaws, causing complete structural failure, are usually found on the cut and machined glass edges \cite{Pel16}.
+
 \section{Fracture Theory}
 
 \subsection{Local Stress Concentration}
 
-Breaking atomic bonds in brittle continuum media to form cracks requires the minimum assumed force
+Breaking atomic bonds in linear elastic brittle continuum media to form cracks requires the minimum assumed force
 
 \begin{equation}
 \label{eq:minforce}
     P = P_{\rm{C}}\,\rm{sin}\left(\frac{\pi x_{\rm{0}}}{\lambda}\right)\approx \frac{P_{\rm{C}}\pi x_{\rm{0}}}{\lambda}\,,
 \end{equation}
 
-where $P_C$ is the atom-dependent cohesive force and $\lambda$ is the distance from atom origin $x_0$. The stiffness yields
-
-\begin{equation}
-    k=\frac{P}{x_0}=\frac{P_{\rm{C}}\pi}{\lambda}\,.
-\end{equation}
-
-The cohesive strength of the material per unit bonds yields
+where $P_C$ is the atom-dependent cohesive force and $\lambda$ is the distance between nuclei from atom origin $x_0$ \cite{And05}. Accordingly, the cohesive strength of the material per unit bonds \cite{And05} yields
 
 \begin{equation}
 \label{eq:cohesivestrength}
     \sigma_{\rm{C}}=E\varepsilon=\frac{E\lambda}{\pi x_{\rm{0}}} \,.
 \end{equation}
 
-The surface energy of the material, consisting of the energy of broken atomic bonds in the unit area, is given by
+The surface energy of the material \cite{And05}, consisting of the energy of broken atomic bonds in the unit area, is given by
 
 \begin{equation}
     \label{eq:surfaceenergy}
     \gamma_{\rm{S}}=\frac{1}{2}\int_{0}^{\lambda}\sigma_{\rm{C}}\,\rm{sin}\left(\frac{\pi x}{\lambda}\right)dx=\sigma_{\rm{C}}\frac{\lambda}{\pi} \,.
 \end{equation}
 
-Substituting eq. \ref{eq:cohesivestrength} into eq. \ref{eq:surfaceenergy} yields the cohesive strength
+Substituting eq. \ref{eq:cohesivestrength} into eq. \ref{eq:surfaceenergy} yields the cohesive strength \cite{And05}
 
 \begin{equation}
     \label{eq:newcohesivestrength}
@@ -225,11 +222,9 @@ with curvature $\rho=b^2/a$ and stress concentration $k_{\rm{t}} = \sigma_{\rm{V
     \sigma_{\rm{f}}=\sqrt{\frac{E\gamma_{\rm{S}}}{4a}} \,.
 \end{equation}
 
-Eq. \ref{eq:FailureStressLocalStress} is based on a continuum assumption and not valid on atomic level and is only an approximation of reality. Local stress intensification is provided by pre-existing micro-structural material flaws (inhomogeneities, discontinuities) such as micro-cracks and voids \cite{Sch12}. Application of stress $\sigma_{\rm{f}}$ causes these flaws to grow in size. \cite{Flo98, Pel16}. Critical flaws, causing complete structural failure, are usually found on the cut and machined glass edges \cite{Pel16}.
-
 \subsection{Energy balance}
 
-According to global energy balance models by Irwin and Griffith \cite{Sch12, And05}, crack area extension $dA$ requires a sufficiently large potential energy $\Pi$ (the energy release rate $G$) to overcome the surface energy $W_{\rm{S}}$ (the material resistance or crack resistance $R$). The rate of change of total energy is given by
+According to global energy balance considerations by Irwin and Griffith \cite{Sch12, And05}, crack area extension $dA$ requires a sufficiently large potential energy segment ${\rm{d}}\Pi$ to overcome the surface energy segment ${\rm{d}}W_{\rm{S}}$. In other words, fracturing occurs when the energy release rate $G$ exceeds the material or crack resistance $R$. The rate of change of total energy is given by
 
 \begin{equation}
     \label{eq:EnergyBalance}
@@ -259,7 +254,7 @@ Loading at a crack is subdivided into three categories. Mode I refers to princip
     \sigma_{\rm{ij}}=\frac{K}{\sqrt{2\pi r}}f_{\rm{ij}}(\theta)\,,
 \end{equation}
 
-with distance $r$ and angle $\theta$ from the crack tip, dimensionless function $f_{\rm{ij}}(\theta)$ and stress intensity factor $K=\{K_{\rm{I}},K_{\rm{II}},K_{\rm{III}}\}$. The definitions of the dimensionless angular functions are listed in the appendix. The stress intensity factors \cite{And05, Xu11} are derived empirically. Uniform tensile stress applied on an infinite plane (\textt{Young's Modulus} $E$) with a through crack generates energy release rate
+with distance $r$ and angle $\theta$ from the crack tip, dimensionless functions $f_{\rm{ij}}(\theta)$ and stress intensity factor $K=\{K_{\rm{I}},K_{\rm{II}},K_{\rm{III}}\}$. The definitions of the dimensionless angular functions $f_{\rm{ij}}(\theta)$ are listed in \autoref{app:AngularFunctions}. The stress intensity factors \cite{And05, Xu11} are derived empirically. Uniform tensile stress applied on an infinite plane (with \textt{Young's Modulus} $E$) containing a through crack generates energy release rate
 
 \begin{equation}
     G = \frac{K_{\rm{I}}^2}{E}\,\,.
@@ -286,16 +281,16 @@ The normal stress σ and the shear stress τ, corresponding to the normal displa
 For a single mode I tensile fracture, for example, the physical meanings of δp and δc is illustrated below. For this case, because it is pure tension, δp is represented by δnp and δc is represented by δnc. In the below figure, the white area represents the continuum domain that is intact without any fractures; the light yellow area represents physically discrete fracture; the orange area between them is defined as plastic zone, which corresponds to the strain softening part (δnp ~ δnc) in the above figure. It is worth noting that in the figure below, which represents the crack propagating from right to left, the short vertical red bars between the red line and the blue line represent the magnitudes of normal stress σ in the joint elements. It can be seen that δnp represents the position, where the normal stress σ in the joint element reaches its peak value (tensile strength ft); ahead of this position (to the discrete fracture direction), the domain is at a strain softening stage (orange area), which means the normal stress σ decreases from tensile strength ft to zero while the normal displacements δn increases from δnp to δnc. After this moment (when δn = δnc), this joint element will fail and the constitutive law is not applied to this failed joint element anymore. Instead, the interaction between the fracture walls will be counted as contact force, including normal compression and sliding friction, which is calculated by the contact algorithms. 
 
 \begin{enumerate}
-    \item Contact Algorithm \cite{Mun}
+    \item Contact Algorithm \cite{Mun04}
 \end{enumerate}
 
 The detailed contact algorithms for the three-dimensional FEMDEM method can be found in Munjiza’s book (2004). Furthermore, empirical microscale roughness effects can also be introduced via a Joint Constitutive Model, to account for dilation and normal stiffness on stressed new and pre-existing fracture surfaces, for implementation of empirical JCM, see Lei et al. (in review, 2016).
 
 Munjiza et al. \cite{Mun99} applies a combined single and smeared crack model. 
 
-\subsection{Different Analytical Models}
-
-Mili et al. \cite{Mil12} attempted application of the \texttt{Hertzian Contact Law}, but only found accurate predictions for low impact velocities. Kuruvita et al. \cite{Kur14} investigated a spring-mass model and a wave propagation method for infinitely thick plates. Pel et al.The Rankine fracture criterion predicts crack initiation after the maximum principal stress reaches the material strength \cite{Pel16}.
+%\subsection{Different Analytical Models}
+%
+%Mili et al. \cite{Mil12} attempted application of the %\texttt{Hertzian Contact Law}, but only found accurate %predictions for low impact velocities. Kuruvita et al. %\cite{Kur14} investigated a spring-mass model and a wave %propagation method for infinitely thick plates. Pel et %al.The Rankine fracture criterion predicts crack initiation %after the maximum principal stress reaches the material %strength \cite{Pel16}.
 
 \section{Background Research}
 
@@ -339,8 +334,7 @@ Liu et al. \cite{Liu16} numerically investigated the optimisability of the inter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Numerical Simulations}
+\subsection{FEMDEM Theory}
 
 %Motivation
 The task of fracture models is to predict crack initiation and propagation. Classical fracture models, e.g. maximum principal stress and strain \cite{Alt17}, cannot predict crack initiation and propagation sufficiently accurate in most situations. 
@@ -350,15 +344,23 @@ The task of fracture models is to predict crack initiation and propagation. Clas
 Hence numerical finite element simulations have been conducted by various authors using commercial software such as \texttt{DYNA2D}, \texttt{LS-DYNA3D} and \texttt{ABAQUS}. A disadvantage of pure FEM methods is the inefficient solid-gas coupling and high computational costs. Discrete element methods (\texttt{DEM}) treat each fracture as a seperate body, but are not able to accurately model the common cracking pattern of glass \cite{Che17}.
 
 \bigbreak
+In continuum problems, the number of particles, the shape of particles and similar micromechanical characteristics are abstracted through the constitutive law, and they do not appear in computational simulations. 
+
+\bigbreak
+In discontinua problems, the number of particles, size of particles, shape of particles, size distribution, shape distribution, size of the box, etc., are the key parameters governing the behaviour of the systems. Discontinua-based formulations are the only available solution for problems where the continuum hypothesis is not valid \cite{Mun04}.
+
+\bigbreak
 %FEMDEM
-In contrast, the combined discrete finite element method \texttt{FEMDEM} \cite{Wan18, Mun95, Mun99, Mun04, Mun12, Mun13, Guo16, Gao14, Xu14, Che18} is able to model both deformation and interaction of matrix bodies. The discrete elements consist of clusters of deformable finite elements. Cracks propagate along common finite element boundaries. The method remedyingly combines the solid interface and fracturing. Fracturing results in the formation of new discrete elements \cite{Mun13}. The driving equations of motion are given by
+The combined discrete finite element method \texttt{FEMDEM} \cite{Wan18, Mun95, Mun99, Mun04, Mun12, Mun13, Guo16, Gao14, Xu14, Che18} is able to model both deformation and interaction of matrix bodies. The discrete elements consist of clusters of deformable finite elements. Cracks propagate along common finite element boundaries. The method combines the solid interface and fracturing. Fracturing results in the formation of new discrete elements \cite{Mun13}. 
+
+\bigbreak
+The driving equations of motion are given by
 
 \begin{equation}
     M\ddot{x}+\mu\dot{x}+f_{int}=f_{ext}=f_{\rm{l}}+f_{\rm{b}}+f_{\rm{c}}\,,
 \end{equation}
 
-with lumped nodal mass matrix $M$, nodal displacements $x$, viscosity $\mu$, internal nodal forces $f_{\rm{int}}$ and external nodal forces $f_{\rm{ext}}$. External forces contain consist of external loads $f_{\rm{l}}$, bonding forces $f_{\rm{b}}$ and contact forces $f_{\rm{c}}$. Internal forces $f_{\rm{int}}$ are generated by element deformation. FEMDEM systems solve these equations via explicit
-time integration using the forward Euler method \cite{Lei16}.
+with lumped nodal mass matrix $M$, nodal displacements $x$, viscosity $\mu$, internal nodal forces $f_{\rm{int}}$ and external nodal forces $f_{\rm{ext}}$. External forces contain consist of external loads $f_{\rm{l}}$, bonding forces $f_{\rm{b}}$ and contact forces $f_{\rm{c}}$. Internal forces $f_{\rm{int}}$ are generated by element deformation. FEMDEM systems solve these equations via explicit time integration using the forward \texttt{Euler} method \cite{Lei16}.
 
 \bigbreak
 %Munjiza
@@ -380,16 +382,65 @@ with penetration length $L_{\rm{p}}$, potential function $\varphi$ along the tar
     f_{\rm{t}}=\mu_{mob}\lVert f_{\rm{n}} \rVert\frac{\varv_{\rm{r}}}{\lVert \varv_{\rm{r}}\rVert}\,,
 \end{equation}
 
-with relative velocity $v_{\rm{r}}$ at the Gauss point and mobilised friction coefficient $\mu_{mob}$, which varies during the shearing process.
+with relative velocity $v_{\rm{r}}$ at the Gauss point and mobilised friction coefficient $\mu_{mob}$ which varies during the shearing process.
 
 \bigbreak
-Conventional \texttt{FEMDEM} methods are significantly inaccurate, as their applied complex shaped polygons require deformability restriction constraints (so-called locking) to maintain stability of the simulation \cite{Lat15}. Munjiza et al. \cite{Mun13} developed a novel \texttt{2D} \texttt{FEMDEM} code, \texttt{Y}. The code is based on the so-called \texttt{F-bar} approach which uses 10-noded quadratic elements to reduce volumetric locking. Xiang et al. \cite{Xia09} developed the \texttt{Y}-code further and extended to \texttt{3D}. The novel \texttt{3D} \texttt{FEMDEM} code \texttt{Solidity}, \texttt{Y3D}, features coupled multi-body interaction \cite{Lat15}.
+Conventional \texttt{FEMDEM} methods are significantly inaccurate, as their applied complex shaped polygons require deformability restriction constraints (so-called locking) to maintain stability of the simulation \cite{Lat15}. 
+
+\bigbreak
+Munjiza et al. \cite{Mun13} developed a novel \texttt{2D} \texttt{FEMDEM} code, \texttt{Y}. The code is based on the so-called \texttt{F-bar} approach which uses 10-noded quadratic elements to reduce volumetric locking. Xiang et al. \cite{Xia09} developed the novel \texttt{3D} \texttt{FEMDEM} code \texttt{Solidity}, \texttt{Y3D}, which features coupled multi-body interaction \cite{Lat15}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Proposed Approach}
+\section{Numerical Simulation}
+
+The simulation is conducted using the Software \texttt{Y}. Tbl. ... comprises a list of all parameters.
+
+\begin{table}
+  \caption{List of Y3D input parameters}
+  \label{tab:inpar}
+  \begin{tabular}{cc}
+    \toprule
+    Parameter               & Description                   \\
+    \midrule
+    \texttt{/YD/YDC/MCSTEP} & Maximum number of timesteps   \\
+    \texttt{/YD/YDC/NCSTEP} & Current number of timesteps   \\
+    \texttt{/YD/YDC/ISAVE}  & Restart file saving frequency \\
+    \texttt{/YD/YDC/DCGRAX} & Gravity in X Direction        \\
+    \texttt{/YD/YDC/DCGRAY} & Gravity in X Direction        \\
+    \texttt{/YD/YDC/DCGRAZ} & Gravity in Z Direction        \\
+    \texttt{/YD/YDC/DCSTEC} & Size of timestep              \\
+    \texttt{/YD/YDC/DCTIME} & Current time                  \\
+    \texttt{/YD/YDC/DCURELX}&                               \\
+    \texttt{/YD/YDC/INITER} &                               \\
+    \texttt{/YD/YDC/ICOUTF} &                               \\
+    
+    
+  \bottomrule
+  \end{tabular}
+\end{table}
+  
+/YD/YDC/ICOUTF-Output frequency
+/YD/YDC/ICOUTI   -Current number of iterations
+
+
+Useful parameters are ...
+\begin{enumerate}
+    \item Timestep: $\Delta t:\,0.2\rm{nm}$ \cite{Che18}
+    \item Glass layer: Triangular Mesh \cite{Che18}
+    \item Glass layer: number of elements $=9180$ \cite{Che18}
+    \item Glass layer: far field elemenet size $=2\rm{mm}$ \cite{Che18}
+    \item Inter-layer: no thermal effects \cite{Che18}
+    \item Inter-layer: purely elastic \cite{Che18, Ji98}
+    \item Inter-layer: hyper-elastic \texttt{Mooney-Rivling} \cite{Che16}
+    \item Inter-layer: linear visco-elastic \cite{Flo98}
+    \item Inter-layer: \texttt{Mindlin Plate Theory} \cite{Yua17, ElS18}
+    \item Inter-layer: visco-plastic \texttt{Johnson}-\texttt{Cook} \cite{Xu11, Gao14}
+\end{enumerate}
+
+\section{Approach}
 
 The approach is ... \\
 
@@ -407,31 +458,21 @@ Useful parameters are ...
     \item Inter-layer: visco-plastic \texttt{Johnson}-\texttt{Cook} \cite{Xu11, Gao14}
 \end{enumerate}
 
-\section{Milestones}
+\section{Results}
 
-Planning Phase: 01 June - 28 June 2019
-\begin{enumerate}
-    \item Background Research
-    \item Requirements Analysis
-    \item Plan of Investigation
-\end{enumerate}
+The results are ...
 
-Computation Phase: 29 June - 30 August 2019
-\begin{enumerate}[resume]
-    \item Set up Simulation
-    \item Validate Parameters
-    \item Tweak Parameters
-    \item Finalize Report
-\end{enumerate}
+\section{Conclusion}
 
-Presentation Phase: 31 August - early September 2019
-\begin{enumerate}[resume]
-    \item Oral presentation 
-\end{enumerate}
+The results show that ...
+
+\begin{acks}
+Gratitude is sent out to the \texttt{AMCG} group for supporting this project and to course director Gerard Gorman for enabling this research.
+\end{acks}
 
 \bibliographystyle{ACM-Reference-Format}
 \setlength{\bibsep}{5.0pt}
-\bibliography{LGP}
+\bibliography{Bib}
 
 \appendix
 
@@ -466,7 +507,7 @@ Smooth particle hydrodynamics (\texttt{SPH}) \cite{Moh17, Moh18} methods redefin
 Element-free Galerkin method (\texttt{EFG}) or Cracking Particle Method (\texttt{CPM})  \cite{Pel16, Fle96, Rab04, Rab07, Rab10}
 define additional test and trial functions locally at the crack. The crack can be arbitrarily oriented, as its growth is represented discretely by activation of crack surfaces at individual particles. The crack is modelled by a local enrichment of the test and trial functions with a sign function (a variant of the Heaviside step function), so that the discontinuities are along the direction of the crack. The discontinuity consists of cylindrical planes centred at the particles in three dimensions, lines centred at the particles in two dimensions. The model is applied to several 2D problems and compared to experimental data. A shortcoming of this method is the required surface representation of the crack \cite{Rab04}.
 
-\section{Angular Functions for Stress Field Ahead of Crack Tip}
+\section{Angular Functions for Stress Field Ahead of Crack Tip}\label{app:AngularFunctions}
 
 \begin{align*}
     f_{\rm{xx}}^{\rm{I}}&=\rm{cos}\left(\frac{\theta}{2}\right)\left(1-\rm{sin}\left(\frac{\theta}{2}\right)\rm{sin}\left(\frac{3\theta}{2}\right)\right)\\

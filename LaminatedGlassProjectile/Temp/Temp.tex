@@ -1,0 +1,93 @@
+\documentclass[12pt,twoside]{article}
+
+\begin{document}
+
+Optimising laminated window glass is important to improving public safety and security. Example applications involve counter-acting malicious human activity, persistence against natural hazards, and preventing and reducing the effects of injuries and accidents due to flying glass debris. A novel coupled multi-physics software has been developed further by the \texttt{AMCG} group at Imperial College. In the past, the software has been successfully applied to geological applications. In this project, the software is applied to numerically predict the dynamic impact response of laminated window glass. The objective is to accurately and realistically simulate the impact of a projectile on a laminated glass plate in 2D (3D). The model geometry is prepared and stored in text files. The results are visualised and validated using numerical experiments from other research.
+
+\section{Experiments}
+
+Xu et al. \cite{Xu11} and Gao et al. \cite{Gao14} numerically carried out quasi-static and dynamic \texttt{Split Hopkinson Pressure Bar} (\texttt{SHPB}) compression experiments under different strain/loading rates. 
+
+\section{Local Stress Concentration}
+
+Breaking atomic bonds in linear elastic brittle continuum media to form cracks requires the minimum assumed force
+
+\begin{equation}
+\label{eq:minforce}
+    P = P_{\rm{C}}\,\rm{sin}\left(\frac{\pi x_{\rm{0}}}{\lambda}\right)\approx \frac{P_{\rm{C}}\pi x_{\rm{0}}}{\lambda}\,,
+\end{equation}
+
+where $P_C$ is the atom-dependent cohesive force and $\lambda$ is the distance between nuclei from atom origin $x_0$ \cite{And05}. Accordingly, the cohesive strength of the material per unit bonds \cite{And05} yields
+
+\begin{equation}
+\label{eq:cohesivestrength}
+    \sigma_{\rm{C}}=E\varepsilon=\frac{E\lambda}{\pi x_{\rm{0}}} \,.
+\end{equation}
+
+The surface energy of the material \cite{And05}, consisting of the energy of broken atomic bonds in the unit area, is given by
+
+\begin{equation}
+    \label{eq:surfaceenergy}
+    \gamma_{\rm{S}}=\frac{1}{2}\int_{0}^{\lambda}\sigma_{\rm{C}}\,\rm{sin}\left(\frac{\pi x}{\lambda}\right)dx=\sigma_{\rm{C}}\frac{\lambda}{\pi} \,.
+\end{equation}
+
+Substituting eq. \ref{eq:cohesivestrength} into eq. \ref{eq:surfaceenergy} yields the cohesive strength \cite{And05}
+
+\begin{equation}
+    \label{eq:newcohesivestrength}
+    \sigma_{\rm{C}}=\sqrt{\frac{E}{\gamma_{\rm{S}}\,x_{\rm{0}}}}\,.
+\end{equation}
+
+Applying $\sigma_{\rm{C}}$ on an infinite plate containing an elliptical hole ($2a \times 2b$) generates vertex stress
+
+\begin{equation}
+\label{eq:vertexstress}
+    \sigma_{\rm{V}}=\sigma_{\rm{C}}\left(1+\frac{2a}{b}\right)=\sigma_{\rm{C}}\left(1+2\sqrt{\frac{a}{\rho}}\right)\,,
+\end{equation}
+
+with curvature $\rho=b^2/a$ and stress concentration $k_{\rm{t}} = \sigma_{\rm{V}} / \sigma_{\rm{C}}$ \cite{And05}. Substituting eq. \ref{eq:newcohesivestrength} into \ref{eq:vertexstress} yields the minimum stress to create fracturing 
+
+\begin{equation}
+    \label{eq:FailureStressLocalStress}
+    \sigma_{\rm{f}}=\sqrt{\frac{E\gamma_{\rm{S}}}{4a}} \,.
+\end{equation}
+
+\section{Energy balance}
+
+According to global energy balance considerations by Irwin and Griffith \cite{Sch12, And05}, crack area extension $dA$ requires a sufficiently large potential energy segment ${\rm{d}}\Pi$ to overcome the surface energy segment ${\rm{d}}W_{\rm{S}}$. In other words, fracturing occurs when the energy release rate $G$ exceeds the material or crack resistance $R$. The rate of change of total energy is given by
+
+\begin{equation}
+    \label{eq:EnergyBalance}
+    \frac{\rm{d}E_{\rm{t}}}{\rm{d}A}=G+R=\frac{\rm{d}\Pi}{\rm{d}A}+\frac{\rm{d}W_{\rm{S}}}{\rm{d}A}\geq0\,,
+\end{equation}
+
+Equality in eq. \ref{eq:EnergyBalance} results in stable crack growth, inequality in unstable growth. Applying the criterion for an infinite plate with a crack of length $a$ yields
+
+\begin{equation}
+\frac{\rm{d}E_{\rm{t}}}{\rm{d}A}=-\frac{\pi\sigma^2a}{E}+2\gamma_S\leq0\,,
+\end{equation}
+
+where $\sigma$ is the applied stress. Hence the minimum stress to generate fracturing is given by
+
+\begin{equation}
+    \label{eq:FailureStressEnergyBalance}
+    \sigma_{\rm{f}} = \sqrt{\frac{2E\gamma_{\rm{S}}}{\pi a}}\,.
+\end{equation}
+
+For sharp cracks ($a>>$) in brittle materials, eq. \ref{eq:FailureStressLocalStress} and eq. \ref{eq:FailureStressEnergyBalance} are consistent. Kuruvita et al. \cite{Kur14} developed their own energy balance model.
+
+\section{Stress Intensity Factor}
+
+Loading at a crack is subdivided into three categories. Mode I refers to principal loading perpendicular to the crack plane, Mode II refers to in-plane shear and Mode III to out-of-plane shear. The stress field of a linear elastic cracked body is approximated by
+
+\begin{equation}
+    \sigma_{\rm{ij}}=\frac{K}{\sqrt{2\pi r}}f_{\rm{ij}}(\theta)\,,
+\end{equation}
+
+with distance $r$ and angle $\theta$ from the crack tip, dimensionless functions $f_{\rm{ij}}(\theta)$ and stress intensity factor $K=\{K_{\rm{I}},K_{\rm{II}},K_{\rm{III}}\}$. The definitions of the dimensionless angular functions $f_{\rm{ij}}(\theta)$ are listed in \autoref{app:AngularFunctions}. The stress intensity factors \cite{And05, Xu11} are derived empirically. Uniform tensile stress applied on an infinite plane (with \textt{Young's Modulus} $E$) containing a through crack generates energy release rate
+
+\begin{equation}
+    G = \frac{K_{\rm{I}}^2}{E}\,\,.
+\end{equation}
+
+\end{document}

@@ -1,0 +1,623 @@
+\documentclass[12pt,twoside]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\reporttitle}{Modelling the Effects of Ballistic Impact on Laminated Window Glass}
+\newcommand{\reportauthor}{Michael Trapp}
+\newcommand{\reportsupervisors}{John-Paul Latham, Jiansheng Xiang, Ado Farsi}
+\newcommand{\reporttype}{\Huge Plan of Investigation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% University Assignment Title Page 
+% LaTeX Template
+% Version 1.0 (27/12/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% WikiBooks (http://en.wikibooks.org/wiki/LaTeX/Title_Creation)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%-----------------------------------------------
+
+\usepackage{textpos}
+\usepackage{natbib}
+\usepackage{kpfonts}
+\usepackage[a4paper,hmargin=2.8cm,vmargin=2.0cm,includeheadfoot]{geometry}
+\usepackage{ifxetex}
+\usepackage{stackengine}
+\usepackage{tabularx,longtable,multirow,subfigure,caption} %hang caption
+\usepackage{fncylab} %formatting of labels
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage[tight,ugly]{units}
+\usepackage{url}
+\usepackage{float}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{dsfont}
+\usepackage{epstopdf} % automatically replace .eps with .pdf in graphics
+\usepackage{backref}
+\usepackage{array}
+\usepackage{latexsym}
+\usepackage{etoolbox}
+\usepackage{enumerate} % for numbering with [a)] format 
+\usepackage{enumitem}
+
+\ifxetex
+\usepackage{fontspec}
+\setmainfont[Scale=.8]{OpenDyslexic-Regular}
+\else
+\usepackage[pdftex,pagebackref,hypertexnames=false,colorlinks]{hyperref} % provide links in pdf
+\hypersetup{pdftitle={},
+  pdfsubject={}, 
+  pdfauthor={\reportauthor},
+  pdfkeywords={}, 
+  pdfstartview=FitH,
+  pdfpagemode={UseOutlines},% None, FullScreen, UseOutlines
+  bookmarksnumbered=true, bookmarksopen=true, colorlinks, 
+  citecolor=blue,
+  filecolor=blue, 
+  linkcolor=blue, 
+  urlcolor=blue}
+\usepackage[all]{hypcap}
+\fi
+\usepackage{tcolorbox}
+
+% various theorems
+\usepackage{ntheorem}
+\theoremstyle{break}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{proof}{Proof}
+
+% example-environment
+\newenvironment{example}[1][]
+{ 
+\vspace{4mm}
+\noindent\makebox[\linewidth]{\rule{\hsize}{1.5pt}}
+\textbf{Example #1}\\
+}
+{ 
+\noindent\newline\makebox[\linewidth]{\rule{\hsize}{1.0pt}}
+}
+
+
+
+%\renewcommand{\rmdefault}{pplx} % Palatino
+% \renewcommand{\rmdefault}{put} % Utopia
+
+\ifxetex
+\else
+\renewcommand*{\rmdefault}{bch} % Charter
+\renewcommand*{\ttdefault}{cmtt} % Computer Modern Typewriter
+%\renewcommand*{\rmdefault}{phv} % Helvetica
+%\renewcommand*{\rmdefault}{iwona} % Avant Garde
+\fi
+
+\setlength{\parindent}{0em}  % indentation of paragraph
+
+\setlength{\headheight}{14.5pt}
+\pagestyle{fancy}
+\fancyfoot[ER,OL]{\thepage}%Page no. in the left on
+                                %odd pages and on right on even pages
+\fancyfoot[OC,EC]{\sffamily }
+\renewcommand{\headrulewidth}{0.1pt}
+\renewcommand{\footrulewidth}{0.1pt}
+\captionsetup{margin=10pt,font=small,labelfont=bf}
+
+
+%--- chapter heading
+
+\def\@makechapterhead#1{%
+  \vspace*{10\p@}%
+  {\parindent \z@ \raggedright %\sffamily
+        %{\Large \MakeUppercase{\@chapapp} \space \thechapter}
+        %\\
+        %\hrulefill
+        %\par\nobreak
+        %\vskip 10\p@
+    \interlinepenalty\@M
+    \Huge \bfseries 
+    \thechapter \space\space #1\par\nobreak
+    \vskip 30\p@
+  }}
+
+%---chapter heading for \chapter*  
+\def\@makeschapterhead#1{%
+  \vspace*{10\p@}%
+  {\parindent \z@ \raggedright
+    \sffamily
+    \interlinepenalty\@M
+    \Huge \bfseries  
+    #1\par\nobreak
+    \vskip 30\p@
+  }}
+  
+
+
+
+% %%%%%%%%%%%%% boxit
+\def\Beginboxit
+   {\par
+    \vbox\bgroup
+	   \hrule
+	   \hbox\bgroup
+		  \vrule \kern1.2pt %
+		  \vbox\bgroup\kern1.2pt
+   }
+
+\def\Endboxit{%
+			      \kern1.2pt
+		       \egroup
+		  \kern1.2pt\vrule
+		\egroup
+	   \hrule
+	 \egroup
+   }	
+
+\newenvironment{boxit}{\Beginboxit}{\Endboxit}
+\newenvironment{boxit*}{\Beginboxit\hbox to\hsize{}}{\Endboxit}
+
+
+
+\allowdisplaybreaks
+
+\makeatletter
+\newcounter{elimination@steps}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash$}p{#1}<{$}}
+\def\elimination@num@rights{}
+\def\elimination@num@variables{}
+\def\elimination@col@width{}
+\newenvironment{elimination}[4][0]
+{
+    \setcounter{elimination@steps}{0}
+    \def\elimination@num@rights{#1}
+    \def\elimination@num@variables{#2}
+    \def\elimination@col@width{#3}
+    \renewcommand{\arraystretch}{#4}
+    \start@align\@ne\st@rredtrue\m@ne
+}
+{
+    \endalign
+    \ignorespacesafterend
+}
+\newcommand{\eliminationstep}[2]
+{
+    \ifnum\value{elimination@steps}>0\leadsto\quad\fi
+    \left[
+        \ifnum\elimination@num@rights>0
+            \begin{array}
+            {@{}*{\elimination@num@variables}{R{\elimination@col@width}}
+            |@{}*{\elimination@num@rights}{R{\elimination@col@width}}}
+        \else
+            \begin{array}
+            {@{}*{\elimination@num@variables}{R{\elimination@col@width}}}
+        \fi
+            #1
+        \end{array}
+    \right]
+    & 
+    \begin{array}{l}
+        #2
+    \end{array}
+    &%                                    moved second & here
+    \addtocounter{elimination@steps}{1}
+}
+\makeatother
+
+%% Fast macro for column vectors
+\makeatletter  
+\def\colvec#1{\expandafter\colvec@i#1,,,,,,,,,\@nil}
+\def\colvec@i#1,#2,#3,#4,#5,#6,#7,#8,#9\@nil{% 
+  \ifx$#2$ \begin{bmatrix}#1\end{bmatrix} \else
+    \ifx$#3$ \begin{bmatrix}#1\\#2\end{bmatrix} \else
+      \ifx$#4$ \begin{bmatrix}#1\\#2\\#3\end{bmatrix}\else
+        \ifx$#5$ \begin{bmatrix}#1\\#2\\#3\\#4\end{bmatrix}\else
+          \ifx$#6$ \begin{bmatrix}#1\\#2\\#3\\#4\\#5\end{bmatrix}\else
+            \ifx$#7$ \begin{bmatrix}#1\\#2\\#3\\#4\\#5\\#6\end{bmatrix}\else
+              \ifx$#8$ \begin{bmatrix}#1\\#2\\#3\\#4\\#5\\#6\\#7\end{bmatrix}\else
+                 \PackageError{Column Vector}{The vector you tried to write is too big, use bmatrix instead}{Try using the bmatrix environment}
+              \fi
+            \fi
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi 
+}  
+\makeatother
+
+\robustify{\colvec}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End: 
+
+% quick way of adding a figure
+\newcommand{\fig}[3]{
+ \begin{center}
+ \scalebox{#3}{\includegraphics[#2]{#1}}
+ \end{center}
+}
+
+%\newcommand*{\point}[1]{\vec{\mkern0mu#1}}
+\newcommand{\ci}[0]{\perp\!\!\!\!\!\perp} % conditional independence
+\newcommand{\point}[1]{{#1}} % points 
+\renewcommand{\vec}[1]{{\boldsymbol{{#1}}}} % vector
+\newcommand{\mat}[1]{{\boldsymbol{{#1}}}} % matrix
+\newcommand{\R}[0]{\mathds{R}} % real numbers
+\newcommand{\Z}[0]{\mathds{Z}} % integers
+\newcommand{\N}[0]{\mathds{N}} % natural numbers
+\newcommand{\nat}[0]{\mathds{N}} % natural numbers
+\newcommand{\Q}[0]{\mathds{Q}} % rational numbers
+\ifxetex
+\newcommand{\C}[0]{\mathds{C}} % complex numbers
+\else
+\newcommand{\C}[0]{\mathds{C}} % complex numbers
+\fi
+\newcommand{\tr}[0]{\text{tr}} % trace
+\renewcommand{\d}[0]{\mathrm{d}} % total derivative
+\newcommand{\inv}{^{-1}} % inverse
+\newcommand{\id}{\mathrm{id}} % identity mapping
+\renewcommand{\dim}{\mathrm{dim}} % dimension
+\newcommand{\rank}[0]{\mathrm{rk}} % rank
+\newcommand{\determ}[1]{\mathrm{det}(#1)} % determinant
+\newcommand{\scp}[2]{\langle #1 , #2 \rangle}
+\newcommand{\kernel}[0]{\mathrm{ker}} % kernel/nullspace
+\newcommand{\img}[0]{\mathrm{Im}} % image
+\newcommand{\idx}[1]{{(#1)}}
+\DeclareMathOperator*{\diag}{diag}
+\newcommand{\E}{\mathds{E}} % expectation
+\newcommand{\var}{\mathds{V}} % variance
+\newcommand{\gauss}[2]{\mathcal{N}\big(#1,\,#2\big)} % gaussian distribution N(.,.)
+\newcommand{\gaussx}[3]{\mathcal{N}\big(#1\,|\,#2,\,#3\big)} % gaussian distribution N(.|.,.)
+\newcommand{\gaussBig}[2]{\mathcal{N}\left(#1,\,#2\right)} % see above, but with brackets that adjust to the height of the arguments
+\newcommand{\gaussxBig}[3]{\mathcal{N}\left(#1\,|\,#2,\,#3\right)} % see above, but with brackets that adjust to the height of the arguments
+\DeclareMathOperator{\cov}{Cov} % covariance (matrix) 
+\ifxetex
+\renewcommand{\T}[0]{^\top} % transpose
+\else
+\newcommand{\T}[0]{^\top}
+\fi
+% matrix determinant
+\newcommand{\matdet}[1]{
+\left|
+\begin{matrix}
+#1
+\end{matrix}
+\right|
+}
+
+
+
+%%% various color definitions
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+
+\newcommand{\blue}[1]{{\color{blue}#1}}
+\newcommand{\red}[1]{{\color{red}#1}}
+\newcommand{\green}[1]{{\color{darkgreen}#1}}
+\newcommand{\orange}[1]{{\color{orange}#1}}
+\newcommand{\magenta}[1]{{\color{magenta}#1}}
+\newcommand{\cyan}[1]{{\color{cyan}#1}}
+
+
+% redefine emph
+\renewcommand{\emph}[1]{\blue{\bf{#1}}}
+
+% place a colored box around a character
+\gdef\colchar#1#2{%
+  \tikz[baseline]{%
+  \node[anchor=base,inner sep=2pt,outer sep=0pt,fill = #2!20] {#1};
+    }%
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+% front page
+\begin{titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Last modification: 2016-09-29 (Marc Deisenroth)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+\includegraphics[width = 4cm]{imperial}\\[0.5cm] 
+
+\begin{center} % Center remainder of the page
+
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+\textsc{\LARGE \reporttype}\\[1.5cm] 
+\textsc{\Large Imperial College London}\\[0.5cm] 
+\textsc{\large Department of Earth Science and Engineering}\\[0.5cm] 
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \huge \bfseries \reporttitle}\\ % Title of your document
+\HRule \\[1.5cm]
+\end{center}
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+
+%\begin{minipage}{0.4\hsize}
+\begin{flushleft} \large
+\textit{Supervisors:}\\
+\reportsupervisors\\[30pt]
+\textit{Student:}\\
+\reportauthor % Your name
+\end{flushleft}
+\vspace{2cm}
+\makeatletter
+Date: \@date 
+
+\vfill % Fill the rest of the page with whitespace
+
+\makeatother
+
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Main document
+\section{Introduction}
+
+Deliberate acts of terrorism, criminal activity and malicious behaviour pose significant threat to buildings and infrastructure. A recent state-of the arts review by \texttt{EU} decision makers revealed that current building guidelines tend to not take these threats into account. Appropriate regulations and guidelines require new experimental and numerical testing methods to accurately quantify the resilience of building elements against explosions events.
+
+\bigbreak
+The \texttt{AMCG} at \texttt{Imperial College London} recently developed a novel coupled dynamic gas/solid \texttt{FEMDEM} code, which is proposed to realistically simulate the shock wave impact on secondary laminated glass. In this paper, the code is provisionally applied to simulate \texttt{2D} and \texttt{3D} projectile impact on a single laminate. For verification, the results from each simulation are analysed and compared to experimental data from the literature.
+
+\section{Physics Theory}
+
+\subsection{Laminated Glass}
+
+%Picture of Laminated Glass
+%Measurements of the plies and inter-layer
+
+Laminated glass is a sandwich structure consisting of two brittle glass plies and an adhered visco-elastic polymer inter-layer (or inter-face) in between. An optional back layer improves structural stability and additional energy absorption \cite{Bio10, Bra10}. The back layer traditionally consists of polycarbonate (\texttt{PC}) \cite{Mon04, Bra10}. Secondary laminated glass consists of two such laminates, separated by a layer of air.
+
+\bigbreak
+Advantageous properties of laminated glass include a relatively high penetration resistance, low weight \cite{Wu14} and the adherence of fractured glass fragments to the structure to reduce the risk of injuries\cite{Che17, Flo98, Ji98}. Breakage of the inner ply significantly reduces strength and facilitates a full collapse of the glass \cite{Flo98}. Prediction of crack initiation and propagation poses a significant challenge and requires ongoing research effort.
+
+\subsection{Inter-layer Model}
+
+The task of the inter-layer is the absorption of impact energy and the maintenance of adhesion to the plies \cite{Wu14}. Inter-layer materials include polymers such as traditional polyvinyl butyral (\texttt{PVB}), thermoplastic polyurethane (\texttt{TPU}), and most recently \texttt{SentryGlas}\textregistered Plus (\texttt{SGP}) \cite{Moh18, Wan18}. 
+
+\bigbreak
+Polymers are commonly modelled as hyper-elastic materials \cite{Gha15}. Work done by stresses onto hyper-elastic materials only depends on the reference state $X$ and the current state $x$, but not on the load path (Fig. \ref{fig:deformation}). Deformation from $X$ to $x$ is described by the deformation gradient \cite{Gu07}
+
+\begin{equation}
+    \label{eq:defgrad}
+    F = \frac{{\rm{d}}\varphi}{{\rm{d}}X}
+\end{equation}
+
+with mapping function $\varphi$ from $X$ to $x$.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth*2/3]{Deformation}
+    \caption{Deformation from reference to current state. \cite{Gu07}}
+    \label{fig:deformation}
+\end{figure}
+
+Hyper-elastics are mathematically described by a characteristic strain energy density function $W$. One of the simplest special cases of hyper-elastic models is the \texttt{Neo-Hookean} model \cite{Gha15}. The strain energy potential function is given by
+
+\begin{equation}
+    \label{eq:NeoHooke}
+    W=\frac{\mu_{\rm{0}}}{2}\left(I_{\rm{1}}-3\right)-\mu_{\rm{0}}\,{\rm{ln}}\,J+\frac{\lambda_{\rm{0}}}{2}{\rm{ln}}^2\,J\,,
+\end{equation}
+
+with Lam\'{e} constants $\lambda_{\rm{0}}$ and $\mu_{\rm{0}}$ from the linearised theory, $J=\lvert F\rvert$ and first invariant $I_{\rm 1}=C_{\rm{II}}$ with right Cauchy stress tensor \cite{Gha15}
+
+\begin{equation}
+    C_{\rm{ij}}=F_{\rm{Ii}}\,F_{\rm{Ij}}\,.
+\end{equation}
+
+Upper case indices refer to the reference configuration, while lower case indices refer to the current configuration.
+
+\bigbreak
+Another common, simple hyper-elastic model is the \texttt{Mooney-Rivlin} model. The strain energy function for the compressible 2-Parameter model \cite{Kum16} is given by
+
+\begin{equation}
+    \label{eq:MooneyRivlinSEF}
+    W_{\rm{2}} = C_{\rm{10}}\left(\bar{I}_{\rm{1}}-1\right)+C_{\rm{01}}\left(\bar{I}_{\rm{2}}-1\right)+\frac{1}{d}(J-1)\,,
+\end{equation}
+
+where $C_{\rm{10}}$ and $C_{\rm{01}}$ are adjustable parameters, $d=2\,/\,K$ with bulk modulus $K$ and $\bar{I}_{\rm{1}}=J^{-\frac{1}{3}}\,I_{\rm{1}}$ and $\bar{I}_{\rm{2}}=J^{-\frac{1}{3}}\,I_{\rm{2}}$ are deviatoric invariants \cite{Aba13}.
+
+\subsection{Fracture Model}
+
+Local stress intensification is provided by pre-existing micro-structural material flaws (so-called inhomogeneities or discontinuities) such as micro-cracks and voids \cite{Sch12}. Application of fracture stress $\sigma_{\rm{f}}$ causes these flaws to grow in size. \cite{Flo98, Pel16}.
+
+\bigbreak
+Combined Single and Smeared Crack Model.
+
+\section{Numerical Theory}
+
+\subsection{FEMDEM}
+The combined discrete finite element method \texttt{FEMDEM} \cite{Wan18, Mun95, Mun99, Mun04, Mun12, Mun13, Guo16, Gao14, Xu14, Che18} is able to realistically model the deformation and interaction and fracturing of matrix bodies. The discrete elements consist of clusters of deformable finite elements. Cracks propagate along common finite element boundaries. Fracturing results in the formation of new discrete elements \cite{Mun13}. 
+
+\bigbreak
+Conventional \texttt{FEMDEM} methods are significantly inaccurate, as their applied complex shaped polygons require deformability restriction constraints (so-called locking) to maintain stability of the simulation \cite{Lat15}. 
+
+\bigbreak
+Munjiza et al. \cite{Mun13} developed a novel \texttt{2D} \texttt{FEMDEM} code, \texttt{Y}. The code is based on the so-called \texttt{F-bar} approach which uses 10-noded quadratic elements to reduce volumetric locking. Xiang et al. \cite{Xia09} developed the novel \texttt{3D} \texttt{FEMDEM} code \texttt{Solidity}, \texttt{Y3D}, which features coupled multi-body interaction \cite{Lat15}.
+
+\subsection{Governing Equations}
+The governing equations for the finite element calculations in the \texttt{FEMDEM} method are the equations of motion. The equations are given by
+
+\begin{equation}
+    M\ddot{x}+\mu\dot{x}+f_{int}=f_{ext}=f_{\rm{l}}+f_{\rm{b}}+f_{\rm{c}}\,,
+\end{equation}
+
+with lumped nodal mass matrix $M$, nodal displacements $x$, viscosity $\mu$, internal nodal forces $f_{\rm{int}}$ and external nodal forces $f_{\rm{ext}}$. External forces contain consist of external loads $f_{\rm{l}}$, bonding forces $f_{\rm{b}}$ and contact forces $f_{\rm{c}}$. Internal forces $f_{\rm{int}}$ are generated by element deformation. FEMDEM systems solve these equations via explicit time integration using the forward \texttt{Euler} method \cite{Lei16}.
+
+\subsection{Contact Algorithm}
+
+The combination of discrete and finite elements is established via an interaction algorithm \cite{Lei16}, which is based on the original distributed potential contact force approach \cite{Mun13}. The contact forces between a contractor and target solid are given by
+
+\begin{equation}
+    f_c=\int_{\Gamma_{\rm{c}}}n\left(\varphi_{\rm{c}}-\varphi_{\rm{t}}\rm{d}\Gamma_{\rm{c}}\right)\,,
+\end{equation}
+
+with outward unit normal n to penetration boundary $\Gamma_{\rm{c}}$, and potential functions $\varphi_{\rm{c}}$ and $\varphi_{\rm{t}}$ for contractor and target. The contractor applies to the target a normal contact force
+
+\begin{equation}
+    f_n=-n\int_0^{L_{\rm{p}}} p\varphi(l){\rm{d}}l\,,
+\end{equation}
+
+with penetration length $L_{\rm{p}}$, potential function $\varphi$ along the target edge and penalty term $p$. It also applies a tangential friction force 
+
+\begin{equation}
+    f_{\rm{t}}=\mu_{mob}\lVert f_{\rm{n}} \rVert\frac{\varv_{\rm{r}}}{\lVert \varv_{\rm{r}}\rVert}\,,
+\end{equation}
+
+with relative velocity $v_{\rm{r}}$ at the Gauss point and mobilised friction coefficient $\mu_{mob}$ which varies during the shearing process.
+
+\section{Numerical Model 2D}
+
+\subsection{Setup}
+
+An input \texttt{Y} file is generated using the pre-processor \texttt{GID} \cite{GID11}. A list of input file parameters is provided in appendix \ref{ch:SimulationParameters}. The geometry can also be imported from common \texttt{CAD} software such as \texttt{AutoCAD}. The input file contains the geometry, constraints, materials, etc., as well as the simulation parameters. The high performance computing (\texttt{HPC}) system at \texttt{Imperial College London} is applied to generate time series images of the specific simulation. The series is analysed using the post-processing software \texttt{Hyperview} \cite{Hyp17}.
+
+\subsection{Geometry, Materials and Constraints}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{Geometry}
+    \caption{Geometry of the Laminated Glass Structure and Projectile \cite{Che18}}
+    \label{fig:geometry}
+\end{figure}
+
+Fig. \ref{fig:geometry} illustrates the geometric setup. The figure shows the initial state of the projectile (yellow) immediately before impact on the laminated glass (glass plies in blue and red, inter-layer in green). The glass is fixed via a support system (brown).
+
+\bigbreak
+Critical flaws, which cause complete structural failure, are usually found on the cut and machined glass edges \cite{Pel16}. Based on this consideration, the boundary structure layout requires special care.
+
+\bigbreak
+In real-world applications, the dimensions of the inter-layer are smaller than the dimensions of the glass plies. Therefore, there exist a translational degree of freedom for the inter-layer. This effect is also considered in this paper.
+
+\subsection{Verification}
+
+Physical experiments involving the breakage of glass by projectiles or shock blasts require special safety arrangements. Air blast impact experiments are being conducted outdoors by service company \texttt{Jabisupra} \cite{Jab16} in cooperation with \texttt{Imperial College London}. The company is active in the field of envelope security and specialises in protecting infrastructure from certain threats. 
+
+\bigbreak
+Many researchers have already conducted impact experiments in the past. A majority of the findings, given in the following, are likely to be applicable to the present paper.
+
+\bigbreak
+Dynamic impact on laminated glass comprises hard and soft body impact \cite{Moh17}. Hard body impact such as ballistic impact \cite{Bra10} causes minimal deformation to the projectile, while soft body impact such as bird impact \cite{Moh17} causes the projectile to undergo extensive deformation.
+
+\bigbreak
+Relevant parameters of the impact projectile include the normal velocity \cite{Gra98, Kur14, Dar13, Wu14}, the mass \cite{Kur14, Dar13}, the angle \cite{Gra98, Kur14, Dar13}, the shape \cite{Dar13} and the size \cite{Wu14}. Relevant parameters for the outer glass ply include its dimensions \cite{Wan18}, its mass, the support conditions \cite{Wan18} and the make-up \cite{Wan18}. For the inter-layer, the material \cite{Moh18, Wan18, Mon04}, thickness \cite{Ji98, Kur14, Wan18} and temperature \cite{Moh18, Zha19} are relevant.
+
+\bigbreak
+Low velocity ($\approx 20\,\mathrm{m}/\mathrm{s}$) hard impact experiments include the use of projectiles in form of road construction chippings \cite{Gra98}, ballistics \cite{Mon04}, drop-down weights \cite{Che15, Mil12, Wan18}, aluminum projectiles \cite{Mil12} and steel balls \cite{Beh99, Flo98, Wan18}. High velocity (around $180 m/s$) soft impact experiments include the use of silicon rubber projectiles \cite{Moh17} and gas guns \cite{Moh18}.
+
+\bigbreak
+Wang et al. \cite{Wan18} found that the panel size had an inferior effect on the breakage resistance \cite{Wan18}. Similarly, Monteleone et al. \cite{Mon04} found that only a local area of the ply around the impact absorbed the impact energy for high velocities.
+
+\bigbreak
+Kuruvita et al. \cite{Kur14} found that impact velocity and plate thickness contributed significantly towards the impact resistance, compared to impact mass and inter-layer thickness. Wang et al. \cite{Wan18} found an increased inter-layer thickness to have a negative effect on energy absorption. Liu et al. \cite{Liu16} established that the inter-layer thickness did not contribute towards energy absorption. In contrast, Behr and Kremer \cite{Beh99} found an increased inter-layer thickness to better protect the inner ply. Kim et al. \cite{Kim16} numerically optimised the \texttt{PVB} inter-layer constitution to prevent all damage to the inner glass ply.
+
+\bigbreak
+Liu et al. \cite{Liu16} numerically investigated the optimisability of the inter-layer in terms energy absorption by simulating the impact of a human head. Zhang et al. \cite{Zha19} investigated the influence of temperature on the inter-layer and found that a hybrid \texttt{TPU}/\texttt{SGP}/\texttt{TPU} inter-layer performed best over the entire range of tested temperatures.
+
+\section{Hypothesis}
+
+The software Solidity is expected to realistically predict and quantify the solid-solid interaction, deformation and fracturing behavior of the laminated window glass upon impact with the projectile. Experimental data from previous research is adduced to further verify this hypothesis.
+
+\section{Milestones}
+
+due 28 June 2019
+
+\begin{enumerate}
+    \item Plan of Investigation (01-28 June)
+    \item Review of Current Theory (01-21 June)
+    \item Requirements Analysis (01-21 June)
+    \item Software Setup (21-28 June)
+    \item Specification of Testing Procedures (21-28 June)
+    \item First Prototype Programme (21-28 June)
+\end{enumerate}
+
+\vspace{0.3cm}
+due 30 August 2019 
+
+\begin{enumerate}[resume]
+    \item 2D Simulations (28 June - 12 July)
+    \item 3D Simulations (12 July - 09 August)
+    \item Validation of Results (09 August - 30 August)
+    \item Outline of Report (28 June - 30 August)
+    \item Final Draft of Report (01 June - 30 August)
+\end{enumerate}
+
+\vspace{0.3cm}
+due early-mid September
+
+\begin{enumerate}[resume]
+    \item oral presentation
+\end{enumerate}
+
+\bibliographystyle{unsrt}
+\setlength{\bibsep}{5.0pt}
+\bibliography{Bib}
+
+\appendix
+\section{Simulation Parameters}
+\label{ch:SimulationParameters}
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{ll}
+    \toprule
+    Parameter               & Description                   \\\hline
+    \midrule  
+    \texttt{/YD/YDC/MCSTEP} & Maximum number of timesteps   \\
+    \texttt{/YD/YDC/NCSTEP} & Current number of timesteps   \\
+    \texttt{/YD/YDC/ISAVE}  & Restart file saving frequency \\
+    \texttt{/YD/YDC/DCGRAX} & Gravity in X Direction        \\
+    \texttt{/YD/YDC/DCGRAY} & Gravity in X Direction        \\
+    \texttt{/YD/YDC/DCGRAZ} & Gravity in Z Direction        \\
+    \texttt{/YD/YDC/DCSTEC} & Size of timestep              \\
+    \texttt{/YD/YDC/DCTIME} & Current time                  \\
+    \texttt{/YD/YDC/DCURELX}& Not specified                 \\
+    \texttt{/YD/YDC/INITER} & Not specified                 \\
+    \texttt{/YD/YDC/ICOUTF} & Output frequency              \\
+    \texttt{/YD/YDC/ICOUTI} & Current number of iterations  \\
+    \texttt{/YD/YDC/DCSIZC} &                               \\
+    \texttt{/YD/YDC/DCSIZF} &                               \\
+    \texttt{/YD/YDC/DCSIZS} &                               \\
+    \texttt{/YD/YDC/DCSIZV} &                               \\
+    \texttt{/YD/YDC/DCSIZD} &                               \\
+    \texttt{/YD/YDC/DCSIZA} &                               \\
+    \texttt{/YD/YDC/DCSTEC} &                               \\
+    \texttt{/YD/YDC/DCTIME} &                               \\
+    \texttt{/YD/YDC/DCRMPT} &                               \\
+    \texttt{/YD/YDC/DCGRST} &                               \\
+    \texttt{/YD/YDC/ICSAVF} &                               \\
+    \texttt{/YD/YDC/ICOUTP} &                               \\
+    \texttt{/YD/YDC/ICFMTY} &                               \\
+    \texttt{/YD/YDC/ICIATY} &                               \\\hline
+    \bottomrule
+  \end{tabular}
+  \caption{List of Y3D input parameters}
+  \label{tab:inpar}
+\end{table}
+
+\end{document}
